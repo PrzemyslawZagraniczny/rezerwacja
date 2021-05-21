@@ -1,0 +1,159 @@
+<div class="container with-padding">
+    <div class="row tlo ">
+        <div id="search" class="col-xs-12 col-sm-10 col-md-6 col-lg-6 col-sm-offset-1">
+            <div class="row">
+                <form class="form-horizontal login100-form" method="post" id="reserveForm">
+                    <div class="panel panel-default tlo">
+                            <div class="panel-heading">Ustal datę rezerwacji pojazdu</div>
+                            <div class="panel-body">
+                <div class='col-md-6'>
+                        <div class="form-group">
+                            <label>Data od:</label>
+                            <div class='input-group date'  id='dataOd'>
+                                <input type='text' class="form-control"  />
+                                <span class="input-group-addon btn ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-md-6'>
+                        <div class="form-group">
+                            <label>Data do:</label>
+                            <div class='input-group date' id='dataDo'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon btn ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="col-xs-4 pull-right">
+                        <span id="itog" class=""> </span> &nbsp; &nbsp;
+                        <input class="btn " value="Rezerwuj" id="btRent" type="submit">
+                        
+                    </div>
+                </div>
+                </div>
+                <input class="form-control" name="dataOd"  value="" id="dataOdtxt" type="text"  hidden>
+                <input class="form-control" name="dni"  value="" id="days" type="text"  hidden>
+            </form>
+            </div>
+                <script type="text/javascript">
+                    let dateDiff = 0;
+                    let carId = 0;
+                    let rentals = <%- JSON.stringify(carz) %>
+
+                    function dtDiff() {
+                        var dateFrom = new Date($("#dataOd").find("input").val()).valueOf();
+                        
+                        var dateTo = new Date($("#dataDo").find("input").val()).valueOf();
+                        dateDiff = datediff(dateFrom,dateTo);
+                        if(dateDiff < 0 ) {
+                            alert('warning', "Data końca rezerwacji musi być większa od daty początkowej");
+                            $('#itog').html('');
+                        }
+                        else {
+                            dateDiff++;
+                            $('#itog').html( dateDiff +" dni");
+                            $('#days').html( dateDiff);
+                            $('#dataOdtxt').html( dateFrom);
+
+                            var dFrom = new Date(dateFrom);
+                            var dateTo = new Date($("#dataDo").find("input").val());
+                            var lista = [];
+                            while(dateDiff > 0) {
+                                lista.push(new Date(dFrom));
+                                dateDiff = datediff(dFrom,dateTo);
+                                dFrom.setDate(dFrom.getDate()+1);
+                            }
+                            lista.pop();
+                            for (var key in $('#dataOd').data("DateTimePicker").disabledDates()) {
+                                    lista.push(new Date(key)); 
+                            }
+
+                            $('#dataOd').data("DateTimePicker").disabledDates(lista);
+
+                            //rezerwuj
+                        }
+
+                    }
+                    
+                    //$('#dataDo').data("DateTimePicker").minDate(teraz);
+                    $('form#reserveForm').on('submit', function(e) {
+                        e.preventDefault();
+                        var dateFrom = new Date($("#dataOd").find("input").val()).valueOf();
+                        
+                        var dateTo = new Date($("#dataDo").find("input").val()).valueOf();
+                        dateDiff = datediff(dateFrom,dateTo);
+                        dateDiff++;
+                        
+                        
+                        
+                        $.ajax({
+                            type: 'post',
+                            data: {json: JSON.stringify({days: dateDiff, dateFrom: dateFrom, car: carId})}, 
+                            dataType: "text",
+                            url: '/reserve',
+                              
+                        }) .done(function(order) {
+                                MessageBox("Info", order);
+                        });
+
+                    });
+                   
+                    $(function () {
+                        
+                        // rentals = JSON.parse(rentals);
+                        
+                        console.log("rentals " + rentals);
+                        let dtList = [];
+
+                        rentals.map( r => {
+                            carId = r.id_car;
+                            console.log(r.id);
+                            let dt = new Date(r.czas_start);
+                            for( let i = 0; i <= r.days; i++) {
+                                let d = new Date(dt)
+                                d.setDate(d.getDate()+i);
+                                dtList.push(d);
+                                
+                            }
+                        });
+                        console.log(dtList);
+                        $('#dataOd').datetimepicker({
+                            locale: 'en',
+                            minDate: new Date(),
+                            disabledDates: dtList
+                        });
+                        $('#dataOd').data("DateTimePicker").minDate(new Date());
+                        $('#dataDo').datetimepicker({
+                            useCurrent: false, 
+                            minDate: new Date(),
+                            disabledDates: dtList,
+                            locale: 'en'
+                        });
+                        $("#dataOd").on("dp.change", function (e) {
+                            let dt = new Date();
+                            dt.setDate(dt.getDate()-1);
+                            $('#dataOd').data("DateTimePicker").minDate(dt);
+                            $('#dataDo').data("DateTimePicker").minDate(e.date+1);
+                        });
+                         $("#dataDo").on("dp.change", function (e) {
+                    //         $('#dataOd').data("DateTimePicker").maxDate(e.date);
+                            dtDiff();
+                         });
+                    });
+
+                    function datediff(first, second) {
+                        return Math.ceil((second-first)/(1000*60*60*24));
+                    }
+
+
+
+                </script>
+        </div>
+    </div>
+    </div>

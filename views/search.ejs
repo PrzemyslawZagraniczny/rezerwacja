@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html lang="pl" xml:lang="pl" xmlns="http://www.w3.org/1999/xhtml">
+    <%- include('fragments/header'); %>
+    <body>
+
+    
+    <div class="container-fluid with-padding">
+
+              <div class = "row">
+                <div  id = "user" class = "col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-2 col-xs-push-0 col-xs-offset-0 blat">
+                    <div   class="col-xs-12 col-lg-12  text-center">
+                      <h5 class="pull-right" >
+                          <span id="helloBar"></span>
+                          <strong id = "imie"></strong>
+                          <img id = "logo" src="#" alt="">
+                      </h5>                  
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                    <div id="menu" class="col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-2 col-xs-push-0 col-xs-offset-0 blat">
+                        <!-- ******************menu******************* -->
+                        <%- include(menu); %>
+                    </div>
+              </div>
+              <div class="row ">
+                  <div id="powiadomienia" class="row hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-2 col-xs-push-0 col-xs-offset-0 text-center blat">
+                      <div   class="col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-2 col-xs-push-0 col-xs-offset-0 text-center">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div id="main_content" class="col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-2 margin_content blat">
+                    <%- include(body); %>
+              </div>
+        </div>
+
+        <div class="tlo" id = "footer">                            
+          <%- include('fragments/footer'); %>
+        </div>
+
+<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>Modalne okienka dialogowe<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+
+<!-- okienko konsoli -->
+<div class="modal fade" id="runModal" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong class="modal-title" id="dlgTitle">Konsola</strong>
+        </div>
+        <div class="modal-body" >
+            <div class="row">
+              <div class="form-group col-xs-12 text-left">
+                <label for="statement">Polecenie:</label>
+                <textarea class="form-control rounded-1" placeholder="Wprowadz komendę SQL"  rows="5" id="statement" ></textarea>
+              </div> 
+              <div id="return_area" class="form-group col-xs-12 ret-scrollable" >
+              </div> 
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="btRun">Run</button>
+          <hr>
+          <div id="errorPanel" class="consoleStyle"></div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+<!-- dialog Close-->
+<div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="closeModalLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content ">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong class="modal-title" id="dlgTitle"></strong>
+          </div>
+          <div class="modal-body" >
+              <div class="row">
+                  <div id="info_icon" class="col-xs-4 text-left">
+                      <img  src = "img/hand_OK1.png" alt="OK">
+                  </div>
+                  <div class="col-xs-8 text-center col-xs-pull-1">
+                      <p>&nbsp;</p>
+                      <span id="dlgBody">Usuń błędów:</span>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  
+  <!-- modalne okienko spinera -->
+    <div class="modal modal-transparent" id="spinModal" tabindex="-1" role="dialog" aria-labelledby="spinModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center " role="document">
+        <div class="modal-content tlo-transparent">
+            <div class="row  text-center">
+                  <div class="loader"></div>
+            </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  
+  <!-- dialog YesNo-->
+    <div class="modal fade" id="DialogYesNo" tabindex="-1" role="dialog" aria-labelledby="DialogYesNoLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content tlo">
+          <div class="modal-header orange">
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <h5 class="modal-title" id="dlgTitleYesNo">Pytanie</h5>
+          </div>
+          <div class="modal-body" >
+                  <div class="col-xs-4 text-left ">
+                    <img  src = "img/hand_WARNING.png" alt="YESNO">
+                  </div>
+                  <div class="col-xs-8 text-center n col-xs-pull-1">
+                      <p>&nbsp;</p>
+                      <span id="dlgBodyYesNo">Usuń błędów:</span>
+                  </div>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                
+                  <button type="button" class="btn btn-default active " data-dismiss="modal" id="btnYes">Yes</button>
+                  <button type="button" class="btn btn-default col-sm-offset-1 " data-dismiss="modal" id="btnNo">No</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- dialog Check END-->
+  
+    </body>
+</html>
+
+

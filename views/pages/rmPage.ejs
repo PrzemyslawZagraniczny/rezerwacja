@@ -1,0 +1,28 @@
+<span class="login100-form-title" ><h1 id="">Lista Rezerwacji</h1></span><hr class="style1"> 
+<table class="flota" id="">
+    <tr>
+        <th>Model</th>
+        <th>Klient</th>
+        <th>Data wynajęcia</th>
+        <th>Data zwrotu</th>
+        <th>Cena za dzień</th>
+        <th>Operacja</th>
+        
+    </tr>
+    <tbody>
+
+<% if (carz) carz.forEach( function(c) { %>
+            <tr>
+                <td><%= c.model %></td>
+                <td><a href="mailto:<%= c.email %>">Mail do: <strong><%= c.nick %></strong></a></td>
+                <td><%= c.czas_start %></td>
+                <td><%= c.czas_stop %></td>
+                <td><%= parseInt(c.price/100) %> <div class="sup"><%= parseInt(c.price % 100) %></td>
+                <td><a href="/rm?id=<%= c.id %>" style="color:#990000">Usuń</a></td>
+                
+            </tr>
+<% }); %>
+    </tbody>
+</table>
+<!-- <hr class = "style1"> -->
+

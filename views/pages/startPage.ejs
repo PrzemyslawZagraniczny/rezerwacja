@@ -1,0 +1,29 @@
+<span class="login100-form-title" ><h1 id="">Dostępna flota</h1></span><hr class="style1"> 
+<table class="" id="flota">
+    <tr>
+        <th>Model</th>
+        <th>Cena</th>
+        <th>Wolny</th>
+    </tr>
+    <tbody>
+
+<% if (carz) carz.forEach( function(c) { %>
+        
+            <tr>
+                
+                <td><%= c.model %></td>
+                <td>            
+                  <%= parseInt(c.price/100) %> <div class="sup"><%= parseInt(c.price % 100) %>
+                </td>
+                    <% if(c.rented !== undefined ) { %>
+                    <td><a href="/detail?id=<%= c.id %>" style="color:#990000"><span>ZAJĘTY</span></a></td>
+                    <% } else { %>
+                    <td><a href="/detail?id=<%= c.id %>" ><span>Szczegóły</span></a></td>
+                    <% } %>
+            </tr>
+<% }); %>
+    </tbody>
+</table>
+
+<!-- <hr class = "style1"> -->
+

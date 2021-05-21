@@ -1,0 +1,25 @@
+<span class="login100-form-title" ><h1 id="">Historia Rezerwacji</h1></span><hr class="style1"> 
+<table id="flota" id="">
+    <tr>
+        <th>Model</th>
+        <th>Data wynajęcia</th>
+        <th>Data zwrotu</th>
+        <th>Cena za dzień</th>
+        <th>Suma</th>
+    </tr>
+    <tbody>
+
+<% if (carz) carz.forEach( function(c) { %>
+            <tr>
+                <td><%= c.model %></td>
+                <td><%= c.czas_start %></td>
+                <td><%= c.czas_stop %></td>
+                <td><%= parseInt(c.price/100) %> <div class="sup"><%= parseInt(c.price % 100) %></td>
+                <td><%= parseInt(c.price/100 * c.days) %> <div class="sup"><%= parseInt((c.price* c.days) % 100) %></td>
+            </tr>
+<% }); %>
+    </tbody>
+</table>
+
+<!-- <hr class = "style1"> -->
+

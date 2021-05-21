@@ -1,0 +1,39 @@
+<% if ( messages.error ) {console.log(messages.error);} %>
+<div class="wrap-login100 ">
+    <form class="form-horizontal login100-form" method="post" action="/login">
+            <div class="form-group specjalna_czcionka">
+                <div class="col-xs-12 text-center">
+                    <br><span class="login100-form-title" ><h1 id="logowanie">Logowanie</h1></span><hr class="style1"> <br><br>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-xs-offset-2"><input class="form-control" name="email" placeholder="Email" value="" id="email" type="email" maxlength="80" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-xs-offset-2"><input class="form-control" name="password" placeholder="password" value="" id="pass" type="password" maxlength="25" required>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-md-7 col-xs-offset-3">
+                    <div class="container-login-form-btn">
+                        <button class="login-form-btn" data-loading-text="Loguje..." value="Zaloguj" id="btLoguj">
+                            Zaloguj się
+                        </button>
+                    </div>
+                </div>           
+            </div>
+        </form>
+        <br>
+        <div class="form-group">
+
+            <br><br>
+            <div class="text-center">
+                <a href="/rejestracja" id="create_account" class="txt2 hov1">
+                    Zarejestruj się
+                </a>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,32 @@
+<% if (carz) { %>
+    <div class="panel panel-primary rent" style="max-width: 600px" id="">
+        <div class="panel-heading panel-heading-rent">
+            <h4 class="panel-title"><a href="javascript:void(0);" style="text-decoration:none"><%= carz[0].model %></a><strong class="LS rozmiar_ls pull-right"><img class="" src=<%= carz[0].img %> alt="Auto"></strong>
+            <hr class="style5"></h4></div>
+            <div class="panel-body panel-body-pakiety" id="body19042017amira">
+                
+                <p id="klima"><span class="glyphicon glyphicon-check" aria-hidden="false">&nbsp;Klimatyzacja: <%= carz[0].ac == true?'TAK':'NIE'; %></span></p>
+                <p id="seatsno"><span class="glyphicon glyphicon-check" aria-hidden="false">&nbsp;<%= carz[0].seats %> miejsc siedzących</span></p>
+                <p id="doorsno"><span class="glyphicon glyphicon-unchecked" aria-hidden="false">&nbsp;  <%= carz[0].doors %> drzwiowy</span></p>
+                <div id="gearbox"><span class="glyphicon glyphicon-check" aria-hidden="false">&nbsp; manualna skrzynia biegów</span></div>
+            </div>
+        <div class="panel-footer" id="footer">
+            Ogólny stan wozu:
+            <% for( let i = 0; i < carz[0].condition; i++) {%>★<% } %>
+            <% for( let i = carz[0].condition; i < 5; i++) {%>☆<% } %>
+            
+            <a class="pull-right" id="cenaDzien" href="#" data-placement="top" data-toggle="tooltip" title="" data-original-title="">
+                <strong>Cena za dobę:</strong>
+                <span id="" class="label label-cena">PLN &nbsp;
+                    <span id="" class="cena"><%= parseInt(carz[0].price/100) %> <div class="sup"><%= parseInt(carz[0].price % 100) %></div></span>
+                </span></a>
+        </div>
+    </div>
+<% } %>
+
+<!-- <hr class = "style1"> -->
+
+<p>
+
+
+</p>

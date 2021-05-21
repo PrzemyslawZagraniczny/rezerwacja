@@ -1,0 +1,30 @@
+    <button class="btn menu-button " id="btNewsPage" data-toggle="tooltip" title="Cała flota z info o rezerwacji">
+        <a href="/wyszukiwanie"> <span>Główna</span> </a>
+    </button>
+    <button class="btn menu-button " id="btHistPage" data-toggle="tooltip" title="Historia rezerwacji w serwisie">
+        <a href="/historia"><span>Twoja Historia</span></a>
+    </button>
+    <button class="btn menu-button " id="btHistPage" data-toggle="tooltip" title="Zaawansowane wyszukiwanie">
+        <a href="/searching"><span>Wyszukiwanie</span></a>
+    </button>
+
+    <% if(usr && usr.role == 'Admin' ) { %>
+        <button class="btn btn-admin" id="btHistPage" data-toggle="tooltip" title="Anulowanie rezerwacji (Opcja Admina)">
+            <a href="/rm_reservations"><span>Usuń rezerwacje</span></a>
+        </button>
+    <% } %>        
+
+    <div class="btn-group" aria-label="...">
+    </div>
+
+
+    <div class="btn-toolbar pull-right">
+        <div class="btn-group " role="group" aria-label="..." data-toggle="tooltip" title="Wyloguj się z serwisu." data-original-title="">
+            <form action="/logout?_mo=DELETE" method="POST" >
+                <button class="btn menu-button   btn-off pull-right-lg" value="Login " id="btLogoutPage" type="submit" >
+                    <span aria-hidden="false" >Wyloguj się</span>
+                </button>
+            </form>
+        </div>
+    </div>
+<hr>

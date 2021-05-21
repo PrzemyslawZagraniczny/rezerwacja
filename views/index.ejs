@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="pl" xml:lang="pl" xmlns="http://www.w3.org/1999/xhtml">
+    <%- include('fragments/header'); %>
+    <body>
+
+    
+    <div class="container with-padding">
+
+              <div class = "row">
+                <div  id = "user" class = "col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-0 col-xs-push-0 col-xs-offset-3 blat">
+                    <div   class="col-xs-12 col-lg-12  text-center">
+                      <h5 class="pull-right" >
+                          <span id="helloBar"><% if ( cars  && cars[1] ) { %>Witaj <% } %></span>
+                          <strong id = "imie"><% if ( cars  && cars[1] ) { %> <%=cars[1].nick; %> <% } %></strong>
+                      </h5>                  
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                    <div id="menu" class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-0 col-xs-push-0 col-xs-offset-0 blat">
+                        <!-- ******************menu******************* -->
+                        <%- include(menu, { car: cars[0], usr: cars[1]}); %>
+                    </div>
+              </div>
+              <div class="row ">
+                  <div id="powiadomienia" class="row hidden-xs col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-0 col-xs-push-0 col-xs-offset-0 text-center blat">
+                      <div   class="col-xs-12 col-sm-10 col-md-10 col-lg-8 col-sm-offset-2 col-md-offset-1 col-lg-offset-0 col-xs-push-0 col-xs-offset-0 text-center">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div id="main_content" class="col-xs-12 col-sm-10 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-0 margin_content blat">
+                    <%- include(body, {carz: cars[0]}); %>
+              </div>
+        </div>
+
+        <div class="tlo" id = "footer">                            
+          <%- include('fragments/footer'); %>
+        </div>
+
+<!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>Modalne okienka dialogowe<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+
+<!-- dialog Close-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+      <div class="modal-content tlo">
+        <div class="modal-header orange">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong class="modal-title" id="dlgTitle">Modal title</strong>
+        </div>
+        <div class="modal-body" >
+            <div class="row">
+                <div class="col-xs-4 text-left">
+                    <img class="thumbnail" src = "/img/rental.png">
+                </div>
+                <div class="col-xs-8 text-center col-xs-pull-1">
+                    <p>&nbsp;</p>
+                    <span id="dlgBody">Usuń błędów:</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          
+          <div class="col-sm-12 text-center">
+              
+            <button type="button" class="btn btn-default"  id="btnYes"><a href="/historia"><spam style="color:#000;">Historia rezerwacji</spam></a></button></a>
+        </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+  <!-- dialog Check END-->
+  
+    </body>
+</html>
+
+
